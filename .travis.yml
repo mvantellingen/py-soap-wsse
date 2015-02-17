@@ -1,7 +1,3 @@
-# Use the newer container-based infrastructure
-# http://docs.travis-ci.com/user/workers/container-based-infrastructure/
-sudo: false
-
 # Cache pip downloads
 cache:
     directories:
@@ -11,6 +7,9 @@ language: python
 
 python:
     - '2.7'
+
+before_install:
+    - sudo apt-get install libxmlsec1-dev
 
 install:
     - pip install -e . --download-cache $HOME/.pip-cache
