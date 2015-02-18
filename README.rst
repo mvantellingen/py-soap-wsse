@@ -13,7 +13,7 @@ Continuous integration status:
 .. image:: https://travis-ci.org/mvantellingen/py-soap-wsse.svg?branch=master
     :target: https://travis-ci.org/mvantellingen/py-soap-wsse
 
-.. image:: https://coveralls.io/repos/mvantellingen/py-soap-wsse/badge.png?branch=master
+.. image:: https://coveralls.io/repos/mvantellingen/py-soap-wsse/badge.svg
     :alt: Coverage
     :target: https://coveralls.io/r/mvantellingen/py-soap-wsse
 
