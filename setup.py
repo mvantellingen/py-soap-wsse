@@ -18,6 +18,7 @@ setup(
     ],
     tests_require=[
         'py.test',
+        'pytest-cov',
     ],
     entry_points={
     },

@@ -1,8 +1,3 @@
-# Cache pip downloads
-cache:
-    directories:
-      - $HOME/.pip-cache/
-
 language: python
 
 python:
@@ -12,8 +7,8 @@ before_install:
     - sudo apt-get install libxmlsec1-dev
 
 install:
-    - pip install -e . --download-cache $HOME/.pip-cache
-    - pip install coveralls
+    - pip install -e .
+    - pip install pytest-cov coveralls
 
 script:
     - py.test --cov=soap_wsse --cov-report=term-missing
