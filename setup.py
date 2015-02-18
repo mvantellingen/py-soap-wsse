@@ -8,8 +8,11 @@ BinarySecurityToken specification.
 
 setup(
     name='soap_wsse',
-    version='0.1.2',
+    version='0.1.3',
     description=description,
+    url='https://github.com/mvantellingen/py-soap-wsse',
+    author="Michael van Tellingen",
+    author_email="michaelvantellingen@gmail.com",
     install_requires=[
         'dm.xmlsec.binding==1.3.2',
         'lxml>=3.0.0',
