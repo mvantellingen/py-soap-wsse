@@ -133,6 +133,8 @@ def verify_envelope(reply, key_file):
     """Verify that the given soap request is signed with the certificate"""
     doc = etree.fromstring(reply)
     node = doc.find(".//{%s}Signature" % xmlsec.DSigNs)
+    if node is None:
+        raise CertificationError("No signature node found")
     dsigCtx = xmlsec.DSigCtx()
 
     xmlsec.addIDs(doc, ['Id'])

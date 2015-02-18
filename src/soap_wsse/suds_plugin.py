@@ -1,5 +1,8 @@
 from suds.plugin import MessagePlugin
 
+from soap_wsse import sign_envelope, verify_envelope
+from soap_wsse.signing import CertificationError
+
 
 class WssePlugin(MessagePlugin):
     """Suds plugin to sign soap requests with a certificate"""

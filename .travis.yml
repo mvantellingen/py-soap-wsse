@@ -8,7 +8,7 @@ before_install:
 
 install:
     - pip install -e .
-    - pip install pytest-cov coveralls
+    - pip install pytest-cov coveralls pretend
 
 script:
     - py.test --cov=soap_wsse --cov-report=term-missing

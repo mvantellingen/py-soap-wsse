@@ -8,7 +8,7 @@ BinarySecurityToken specification.
 
 setup(
     name='soap_wsse',
-    version='0.1.1',
+    version='0.1.2',
     description=description,
     install_requires=[
         'dm.xmlsec.binding==1.3.2',
@@ -19,6 +19,7 @@ setup(
     tests_require=[
         'py.test',
         'pytest-cov',
+        'pretend>=1.0.0',
     ],
     entry_points={
     },
