@@ -1,9 +1,15 @@
 from setuptools import find_packages, setup
 
 
+description = """
+Simply library to sign and verify SOAP XML requests using the
+BinarySecurityToken specification.
+""".strip()
+
 setup(
     name='soap_wsse',
     version='0.1.0',
+    description=description,
     install_requires=[
         'dm.xmlsec.binding==1.3.2',
         'lxml>=3.0.0',
@@ -11,6 +17,7 @@ setup(
         'suds-jurko>=0.6',
     ],
     tests_require=[
+        'py.test',
     ],
     entry_points={
     },
