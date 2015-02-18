@@ -16,6 +16,9 @@ Continuous integration status:
 .. image:: https://coveralls.io/repos/mvantellingen/py-soap-wsse/badge.svg
     :alt: Coverage
     :target: https://coveralls.io/r/mvantellingen/py-soap-wsse
+    
+.. image:: https://pypip.in/version/soap_wsse/badge.svg
+    :target: https://pypi.python.org/pypi/soap_wsse/
 
 
 References
