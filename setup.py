@@ -8,7 +8,7 @@ BinarySecurityToken specification.
 
 setup(
     name='soap_wsse',
-    version='0.1.0',
+    version='0.1.1',
     description=description,
     install_requires=[
         'dm.xmlsec.binding==1.3.2',
