@@ -25,10 +25,10 @@ setup(
     package_dir={'': 'src'},
     packages=find_packages('src'),
     include_package_data=True,
-    license='proprietary',
+    license='MIT',
     classifiers=[
         'Development Status :: 4 - Beta',
-        'License :: Other/Proprietary License',
+        'License :: OSI Approved :: MIT License',
     ],
     zip_safe=False,
 )
