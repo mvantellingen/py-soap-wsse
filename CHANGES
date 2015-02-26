@@ -1,0 +1,23 @@
+0.2.0 (26-02-2015)
+==================
+
+Remove suds as a dependency and only check for its existence in the plugin
+module.
+
+
+0.1.2  (18-02-2015)
+===================
+ - Fix import errors
+ - Add extra unittests 
+
+
+0.1.1  (18-02-2015)
+===================
+
+ - Use MIT license
+
+
+0.1 (17-02-2015)
+================
+
+Initial release

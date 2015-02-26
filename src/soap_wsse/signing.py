@@ -14,25 +14,20 @@ import dm.xmlsec.binding as xmlsec
 from dm.xmlsec.binding.tmpl import Signature
 from lxml import etree
 from OpenSSL import crypto
-from suds.bindings.binding import envns
-from suds.wsse import dsns, wssens, wsuns
+
+from soap_wsse import ns
 
 
 logger = logging.getLogger(__name__)
 
-# Define extra namespaces
-wssns = (
-    'wss',
-    'http://docs.oasis-open.org/wss/2004/01/' +
-    'oasis-200401-wss-soap-message-security-1.0#')
 
-NSMAP = dict((envns, dsns, wssens, wsuns, wssns))
+BODY_XPATH = etree.XPath(
+    '/SOAP-ENV:Envelope/SOAP-ENV:Body', namespaces=ns.NSMAP)
+HEADER_XPATH = etree.XPath(
+    '/SOAP-ENV:Envelope/SOAP-ENV:Header', namespaces=ns.NSMAP)
+SECURITY_XPATH = etree.XPath('wsse:Security', namespaces=ns.NSMAP)
+TIMESTAMP_XPATH = etree.XPath('wsu:Timestamp', namespaces=ns.NSMAP)
 
-
-BODY_XPATH = etree.XPath('/SOAP-ENV:Envelope/SOAP-ENV:Body', namespaces=NSMAP)
-HEADER_XPATH = etree.XPath('/SOAP-ENV:Envelope/SOAP-ENV:Header', namespaces=NSMAP)
-SECURITY_XPATH = etree.XPath('wsse:Security', namespaces=NSMAP)
-TIMESTAMP_XPATH = etree.XPath('wsu:Timestamp', namespaces=NSMAP)
 C14N = 'http://www.w3.org/2001/10/xml-exc-c14n#'
 XMLDSIG_SHA1 = 'http://www.w3.org/2000/09/xmldsig#sha1'
 
@@ -40,7 +35,7 @@ XMLDSIG_SHA1 = 'http://www.w3.org/2000/09/xmldsig#sha1'
 def ns_id(tagname, suds_ns):
     return '{{{0}}}{1}'.format(suds_ns[1], tagname)
 
-WSU_ID = ns_id('Id', wsuns)
+WSU_ID = ns_id('Id', ns.wsuns)
 BINARY_TOKEN_TYPE = (
     'http://docs.oasis-open.org/wss/2004/01/' +
     'oasis-200401-wss-x509-token-profile-1.0#X509v3')
@@ -68,10 +63,10 @@ xmlsec.set_error_callback(log_errors)
 
 
 class SignQueue(object):
-    WSU_ID = ns_id('Id', wsuns)
-    DS_DIGEST_VALUE = ns_id('DigestValue', dsns)
-    DS_REFERENCE = ns_id('Reference', dsns)
-    DS_TRANSFORMS = ns_id('Transforms', dsns)
+    WSU_ID = ns_id('Id', ns.wsuns)
+    DS_DIGEST_VALUE = ns_id('DigestValue', ns.dsns)
+    DS_REFERENCE = ns_id('Reference', ns.dsns)
+    DS_TRANSFORMS = ns_id('Transforms', ns.dsns)
 
     def __init__(self):
         self.queue = []
@@ -82,10 +77,8 @@ class SignQueue(object):
         self.queue.append(unique_id)
 
     def insert_references(self, signature):
-        signed_info = signature.find('ds:SignedInfo', namespaces=NSMAP)
-        nsmap = {
-            'ec': 'http://www.w3.org/2001/10/xml-exc-c14n#',
-        }
+        signed_info = signature.find('ds:SignedInfo', namespaces=ns.NSMAP)
+        nsmap = {ns.ecns[0]: ns.ecns[1]}
 
         for element_id in self.queue:
             reference = etree.SubElement(
@@ -155,7 +148,7 @@ def get_unique_id():
 
 
 def set_algorithm(parent, name, value):
-    return etree.SubElement(parent, ns_id(name, dsns), {'Algorithm': value})
+    return etree.SubElement(parent, ns_id(name, ns.dsns), {'Algorithm': value})
 
 
 def get_body(envelope):
@@ -180,14 +173,14 @@ def create_key_info_node(security_token):
         </ds:KeyInfo>
 
     """
-    key_info = etree.Element(ns_id('KeyInfo', dsns))
+    key_info = etree.Element(ns_id('KeyInfo', ns.dsns))
 
     sec_token_ref = etree.SubElement(
-        key_info, ns_id('SecurityTokenReference', wssens))
+        key_info, ns_id('SecurityTokenReference', ns.wssens))
     sec_token_ref.set(
-        ns_id('TokenType', wssens), security_token.get('ValueType'))
+        ns_id('TokenType', ns.wssens), security_token.get('ValueType'))
 
-    reference = etree.SubElement(sec_token_ref, ns_id('Reference', wssens))
+    reference = etree.SubElement(sec_token_ref, ns_id('Reference', ns.wssens))
     reference.set('ValueType', security_token.get('ValueType'))
     reference.set('URI', '#%s' % security_token.get(WSU_ID))
     return key_info
@@ -198,9 +191,10 @@ def create_binary_security_token(key_file):
 
     """
     node = etree.Element(
-        ns_id('BinarySecurityToken', wssens), nsmap={wssens[0]: wssens[1]})
-    node.set(ns_id('Id', wsuns), get_unique_id())
-    node.set('EncodingType', wssns[1] + 'Base64Binary')
+        ns_id('BinarySecurityToken', ns.wssens),
+        nsmap={ns.wssens[0]: ns.wssens[1]})
+    node.set(ns_id('Id', ns.wsuns), get_unique_id())
+    node.set('EncodingType', ns.wssns[1] + 'Base64Binary')
     node.set('ValueType', BINARY_TOKEN_TYPE)
 
     with open(key_file) as fh:
@@ -222,8 +216,8 @@ def ensure_security_header(envelope, queue):
         return security[0]
     else:
         nsmap = {
-            'wsu': wsuns[1],
-            'wsse': wssens[1],
+            'wsu': ns.wsuns[1],
+            'wsse': ns.wssens[1],
         }
         return _create_element(header, 'wsse:Security', nsmap)
 

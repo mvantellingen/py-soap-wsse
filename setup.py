@@ -8,7 +8,7 @@ BinarySecurityToken specification.
 
 setup(
     name='soap_wsse',
-    version='0.1.3',
+    version='0.2.0',
     description=description,
     url='https://github.com/mvantellingen/py-soap-wsse',
     author="Michael van Tellingen",
@@ -17,12 +17,12 @@ setup(
         'dm.xmlsec.binding==1.3.2',
         'lxml>=3.0.0',
         'pyOpenSSL>=0.14',
-        'suds-jurko>=0.6',
     ],
     tests_require=[
         'py.test',
         'pytest-cov',
         'pretend>=1.0.0',
+        'suds-jurko>=0.6',
     ],
     entry_points={
     },

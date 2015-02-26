@@ -7,8 +7,7 @@ before_install:
     - sudo apt-get install libxmlsec1-dev
 
 install:
-    - pip install -e .
-    - pip install pytest-cov coveralls pretend
+    - pip install -r test_requirements.pip -e .
 
 script:
     - py.test --cov=soap_wsse --cov-report=term-missing

@@ -1,0 +1,4 @@
+pytest
+pytest-cov
+pretend>=1.0.0
+suds-jurko>=0.6

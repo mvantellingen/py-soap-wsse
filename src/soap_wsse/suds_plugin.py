@@ -1,4 +1,7 @@
-from suds.plugin import MessagePlugin
+try:
+    from suds.plugin import MessagePlugin
+except ImportError:
+    raise ImportError("The suds WssePlugin requires suds to be installed")
 
 from soap_wsse import sign_envelope, verify_envelope
 from soap_wsse.signing import CertificationError
