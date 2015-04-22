@@ -6,6 +6,13 @@ Simply library to sign and verify SOAP XML requests using the
 BinarySecurityToken specification.
 """.strip()
 
+tests_require = [
+    'pytest>=2.6.0',
+    'pytest-cov>=1.7.0',
+    'pretend>=1.0.0',
+    'suds-jurko>=0.6',
+]
+
 setup(
     name='soap_wsse',
     version='0.2.0',
@@ -18,12 +25,8 @@ setup(
         'lxml>=3.0.0',
         'pyOpenSSL>=0.14',
     ],
-    tests_require=[
-        'py.test',
-        'pytest-cov',
-        'pretend>=1.0.0',
-        'suds-jurko>=0.6',
-    ],
+    tests_require=tests_require,
+    extras_require={'test': tests_require},
     entry_points={
     },
     package_dir={'': 'src'},
