@@ -6,6 +6,7 @@ python:
 before_install:
     - sudo apt-get update
     - sudo apt-get install libxmlsec1-dev
+    - pip install codecov
 
 install:
     - pip install -e .[test]
@@ -13,5 +14,5 @@ install:
 script:
     - py.test --cov=soap_wsse --cov-report=term-missing
 
-after_success: 
-    - coveralls
+after_success:
+     - codecov
