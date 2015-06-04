@@ -1,3 +1,8 @@
+0.2.1 (2015-06-04)
+==================
+ - Don't try to validate empty responses in the Suds plugin
+
+
 0.2.0 (26-02-2015)
 ==================
 

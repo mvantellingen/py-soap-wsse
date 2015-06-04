@@ -17,6 +17,7 @@ class WssePlugin(MessagePlugin):
         context.envelope = sign_envelope(context.envelope, self.cert_filename)
 
     def received(self, context):
-        valid = verify_envelope(context.reply, self.cert_filename)
-        if not valid:
-            raise CertificationError("Failed to verify response")
+        if context.reply:
+            valid = verify_envelope(context.reply, self.cert_filename)
+            if not valid:
+                raise CertificationError("Failed to verify response")
