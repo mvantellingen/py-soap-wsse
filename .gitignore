@@ -1,6 +1,7 @@
 *.pyc
 /dist/
 /build/
+/.eggs/
 *.egg-info
 .coverage
 .tox
