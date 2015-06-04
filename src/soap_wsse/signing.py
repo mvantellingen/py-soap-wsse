@@ -138,7 +138,6 @@ def verify_envelope(reply, key_file):
     try:
         dsigCtx.verify(node)
     except xmlsec.VerificationError:
-        logger.error("Verification failed")
         return False
     return True
 

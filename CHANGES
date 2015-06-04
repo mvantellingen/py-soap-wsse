@@ -1,6 +1,7 @@
 0.2.1 (2015-06-04)
 ==================
  - Don't try to validate empty responses in the Suds plugin
+ - Remove warning log message in `signing.verify_envelope`
 
 
 0.2.0 (26-02-2015)
