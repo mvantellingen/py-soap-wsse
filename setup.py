@@ -15,7 +15,7 @@ tests_require = [
 
 setup(
     name='soap_wsse',
-    version='0.2.0',
+    version='0.2.1',
     description=description,
     url='https://github.com/mvantellingen/py-soap-wsse',
     author="Michael van Tellingen",
