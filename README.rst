@@ -1,3 +1,6 @@
+!! This module is longer supported by me, please use http://docs.python-zeep.org/en/master/wsse.html
+
+
 SOAP-WSSE
 =========
 
